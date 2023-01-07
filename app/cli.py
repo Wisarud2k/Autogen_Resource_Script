@@ -5,8 +5,12 @@ import json
 import time
 import os
 import sys
+
+import pyfiglet
+
 import nmap_module
 import exploit_module
+import rc_module
 
 excellentExplotis = []
 # excellentExplotis = ['unix/ftp/vsftpd_234_backdoor','windows/fileformat/activepdf_webgrabber', 'windows/fileformat/djvu_imageurl', 'windows/fileformat/mcafee_hercules_deletesnapshot', 'windows/fileformat/msworks_wkspictureinterface', 'windows/fileformat/sascam_get', 'windows/smb/ms04_007_killbill', 'windows/ftp/sami_ftpd_list']
@@ -21,12 +25,16 @@ manualExplots = []
 def main():
     client = MsfRpcClient('test',port=55553)
 
-    
+    text = "HOME"
+
+# Use the `figlet_format` function to generate the banner
+    banner = pyfiglet.figlet_format(text)
     # Get the list of running jobs
     
     # extracting all of excellent module
     # exploit_list_extract(client,exploitlist)
     while True:
+        print(banner)
         print('press [1] to go to Nmap module')
         print('press [2] to go to Exploit module')
         print('press [3] to go to Resource Script module')
@@ -35,12 +43,16 @@ def main():
 
         if(command == '1'):
             # print('go to Nmap')
+            os.system('cls' if os.name == 'nt' else 'clear')
             nmap_module.nmap_scan()
         elif(command == '2'):
             # print('go to Exploit')
+            os.system('cls' if os.name == 'nt' else 'clear')
             exploit_module.exploit(client)
         elif(command == '3'):
-            print('Resource ')
+            # print('Resource ')
+            os.system('cls' if os.name == 'nt' else 'clear')
+            rc_module.main(client)
         elif(command == '4'):
             print('exiting ..')
             break
