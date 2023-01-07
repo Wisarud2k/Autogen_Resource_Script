@@ -6,6 +6,7 @@ import time
 import os
 import sys
 import nmap_module
+import exploit_module
 
 excellentExplotis = []
 # excellentExplotis = ['unix/ftp/vsftpd_234_backdoor','windows/fileformat/activepdf_webgrabber', 'windows/fileformat/djvu_imageurl', 'windows/fileformat/mcafee_hercules_deletesnapshot', 'windows/fileformat/msworks_wkspictureinterface', 'windows/fileformat/sascam_get', 'windows/smb/ms04_007_killbill', 'windows/ftp/sami_ftpd_list']
@@ -20,9 +21,9 @@ manualExplots = []
 def main():
     client = MsfRpcClient('test',port=55553)
 
-    exploitlist = client.modules.exploits
+    
     # Get the list of running jobs
-    jobs = JobManager(client)
+    
     # extracting all of excellent module
     # exploit_list_extract(client,exploitlist)
     while True:
@@ -31,11 +32,13 @@ def main():
         print('press [3] to go to Resource Script module')
         print('press [4] to exit')
         command = input('Input Command Here: ')
+
         if(command == '1'):
-            print('go to Nmap')
+            # print('go to Nmap')
             nmap_module.nmap_scan()
         elif(command == '2'):
-            print('go to Exploit')
+            # print('go to Exploit')
+            exploit_module.exploit(client)
         elif(command == '3'):
             print('Resource ')
         elif(command == '4'):
@@ -62,6 +65,27 @@ def exploit_list_extract(client,exploitlist):
             lowExploits.append(exploit)
         else:
             manualExplots.append(exploit)
+
+def wait_jobs():
+    # for i in range(5):
+    #     print(".", end="", flush=True)
+    #     time.sleep(1)
+    # os.system('cls' if os.name == 'nt' else 'clear')
+    for i in progressbar(range(15), "Running an Exploit: ", 40):
+        time.sleep(0.1)
+
+def progressbar(it, prefix="", size=60, out=sys.stdout): # Python3.3+
+    count = len(it)
+    def show(j):
+        x = int(size*j/count)
+        print("{}[{}{}] ".format(prefix, "#"*x, "."*(size-x)), 
+                end='\r', file=out, flush=True)
+    show(0)
+    for i, item in enumerate(it):
+        yield item
+        show(i+1)
+    # print("\n", flush=True, file=out)
+
 
 if __name__ == '__main__':
     main()
