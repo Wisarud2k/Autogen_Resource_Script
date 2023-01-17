@@ -38,7 +38,7 @@ def main():
         print('press [1] to go to Nmap module')
         print('press [2] to go to Exploit module')
         print('press [3] to go to Resource Script module')
-        print('press [4] to exit')
+        print('press [0] to exit')
         command = input('Input Command Here: ')
 
         if(command == '1'):
@@ -53,7 +53,7 @@ def main():
             # print('Resource ')
             os.system('cls' if os.name == 'nt' else 'clear')
             rc_module.main(client)
-        elif(command == '4'):
+        elif(command == '0'):
             print('exiting ..')
             break
         else:

@@ -7,7 +7,7 @@ def nmap_scan():
     # ressults = nmap.nmap_version_detection("host", args="--script vulners --script-args mincvss+5.0")
     # print(results)
     # os_results = nmap.nmap_os_detection("192.168.178.2")
-    ip_address = input('Please Input Target Address: ')
+    ip_address = input('Please Input Target IP Address: ')
     try:
         version_result = nmap.nmap_version_detection(ip_address)
     except:
