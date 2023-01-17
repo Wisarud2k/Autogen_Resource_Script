@@ -21,23 +21,27 @@ averageExploits = []
 lowExploits = []
 manualExplots = []
 
+# setting dict for global setting
+settings = {}
 
 def main():
     client = MsfRpcClient('test',port=55553)
 
     text = "HOME"
 
-# Use the `figlet_format` function to generate the banner
+    # Use the `figlet_format` function to generate the banner
     banner = pyfiglet.figlet_format(text)
     # Get the list of running jobs
     
-    # extracting all of excellent module
-    # exploit_list_extract(client,exploitlist)
+    # initialize require options
+    print('Starting Program...')
+    settings['target_ip'] = input('Please input Target Ip address: ')
     while True:
         print(banner)
         print('press [1] to go to Nmap module')
         print('press [2] to go to Exploit module')
         print('press [3] to go to Resource Script module')
+        print('press [4] to go to Options')
         print('press [0] to exit')
         command = input('Input Command Here: ')
 
@@ -53,13 +57,37 @@ def main():
             # print('Resource ')
             os.system('cls' if os.name == 'nt' else 'clear')
             rc_module.main(client)
+        elif(command == '4'):
+            os.system('cls' if os.name == 'nt' else 'clear')
+            __options(settings)
         elif(command == '0'):
             print('exiting ..')
             break
         else:
             print('Error: No command found')
 
-    
+
+def __options(settings):
+    while True:
+        print('press [1] to see all options')
+        print('press [2] to edit options')
+        print('press [0] to exit')
+        command = input('Input Command Here: ')
+
+        if(command == '1'):
+            os.system('cls' if os.name == 'nt' else 'clear')
+            for key in settings:
+                print(key + ": " + settings[key])
+            # print('current Ip address is '+settings['target_ip'])
+        elif(command == '2'):
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('selecting options to edit')
+        elif(command == '0'):
+            print('exiting ..')
+            break
+        else:
+            print('Error: No command found')
+
 def exploit_list_extract(client,exploitlist):
     for exploit in exploitlist:
         rank = client.modules.use('exploit',exploit).rank
