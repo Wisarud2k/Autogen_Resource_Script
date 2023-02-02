@@ -1,6 +1,7 @@
 from pymetasploit3.msfrpc import MsfRpcClient
 from pymetasploit3.msfrpc import JobManager
 
+import signal
 import json
 import time
 import os
@@ -11,6 +12,7 @@ import pyfiglet
 import nmap_module
 import exploit_module
 import rc_module
+import base
 
 excellentExplotis = []
 # excellentExplotis = ['unix/ftp/vsftpd_234_backdoor','windows/fileformat/activepdf_webgrabber', 'windows/fileformat/djvu_imageurl', 'windows/fileformat/mcafee_hercules_deletesnapshot', 'windows/fileformat/msworks_wkspictureinterface', 'windows/fileformat/sascam_get', 'windows/smb/ms04_007_killbill', 'windows/ftp/sami_ftpd_list']
@@ -22,20 +24,23 @@ lowExploits = []
 manualExplots = []
 
 # setting dict for global setting
-settings = {}
+settings = {'TTL':30}
 
 def main():
     client = MsfRpcClient('test',port=55553)
 
     text = "HOME"
-
+    augrs = "AugRS"
     # Use the `figlet_format` function to generate the banner
     banner = pyfiglet.figlet_format(text)
     # Get the list of running jobs
     
     # initialize require options
+    print(pyfiglet.figlet_format(augrs,font = "slant"))
     print('Starting Program...')
-    settings['target_ip'] = input('Please input Target Ip address: ')
+    print('Please Specify Initial Input')
+    base.settings['target_ip'] = input('Target Ip address: ')
+    # settings['target_ip'] = input('Target Ip address: ')
     while True:
         print(banner)
         print('press [1] to go to Nmap module')
@@ -64,29 +69,55 @@ def main():
             print('exiting ..')
             break
         else:
-            print('Error: No command found')
+            print('Error: Command Not Found')
 
 
 def __options(settings):
+    # text = "OPTIONS"
+    print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
     while True:
-        print('press [1] to see all options')
-        print('press [2] to edit options')
+        for key in base.settings:
+            print(key + ": " + str(base.settings[key]))
+        print('')
+        print('press [1] to edit options')
         print('press [0] to exit')
         command = input('Input Command Here: ')
 
         if(command == '1'):
             os.system('cls' if os.name == 'nt' else 'clear')
-            for key in settings:
-                print(key + ": " + settings[key])
-            # print('current Ip address is '+settings['target_ip'])
-        elif(command == '2'):
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print('selecting options to edit')
+            __edit_options()
+            # print('current Ip address is '+settings['target_ip']) 
         elif(command == '0'):
             print('exiting ..')
+            os.system('cls' if os.name == 'nt' else 'clear')
             break
         else:
-            print('Error: No command found')
+            print('Error: Command Not Found')
+
+def __edit_options():
+    
+    while True:
+        try:
+            settings = base.settings
+            count = 0
+            numkey = {}
+            for key in settings:
+                count+= 1
+                print('['+ str(count) +'] ' + key + ": " + str(settings[key]))
+                numkey[count] = key
+            print('select option to edit')
+            command = int(input('selected option: '))
+            if(command in numkey.keys()):
+                print('Current ' + str(numkey[command]) + ' is ' + str(settings[numkey[command]]))
+                newvalue = input('Enter New Value: ')
+                base.settings[numkey[command]] = newvalue
+            else:
+                print('Invalid Input')
+        except:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+
+
 
 def exploit_list_extract(client,exploitlist):
     for exploit in exploitlist:
@@ -125,6 +156,7 @@ def progressbar(it, prefix="", size=60, out=sys.stdout): # Python3.3+
         yield item
         show(i+1)
     # print("\n", flush=True, file=out)
+
 
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@ import json
 import base
 import datetime
 
+
 def nmap_scan():
     nmap = nmap3.Nmap()
     date = datetime.datetime.now()
