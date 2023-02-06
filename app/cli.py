@@ -116,7 +116,10 @@ def __edit_options():
             if(command in numkey.keys()):
                 print('Current ' + str(numkey[command]) + ' is ' + str(settings[numkey[command]]))
                 newvalue = input('Enter New Value: ')
-                base.settings[numkey[command]] = newvalue
+                if(validate.setting_validate(numkey[command],newvalue)):
+                    base.settings[numkey[command]] = newvalue
+                else:
+                    print('Invalid Input')
             else:
                 print('Invalid Input')
         except:
