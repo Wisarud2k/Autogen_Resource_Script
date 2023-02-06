@@ -64,7 +64,7 @@ def main():
             rc_module.main(client)
         elif(command == '4'):
             os.system('cls' if os.name == 'nt' else 'clear')
-            __options(settings)
+            __options()
         elif(command == '0'):
             print('exiting ..')
             break
@@ -72,7 +72,7 @@ def main():
             print('Error: Command Not Found')
 
 
-def __options(settings):
+def __options():
     # text = "OPTIONS"
     print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
     while True:
