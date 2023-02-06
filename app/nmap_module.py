@@ -7,14 +7,16 @@ import datetime
 def nmap_scan():
     nmap = nmap3.Nmap()
     date = datetime.datetime.now()
-    # results = nmap.scan_top_ports("192.168.184.129")
-    # ressults = nmap.nmap_version_detection("host", args="--script vulners --script-args mincvss+5.0")
-    # print(results)
-    # os_results = nmap.nmap_os_detection("192.168.178.2")
-    ip_address = input('Please Input Target IP Address: ')
+    ip_address = ''
     try:
-        version_result = nmap.nmap_version_detection(ip_address)
-        
+        print(base.settings)
+        if(base.settings['target_ip'] != None):
+            ip_address = base.settings['target_ip']
+            version_result = nmap.nmap_version_detection(base.settings['target_ip'])  
+        else:
+            ip_address = input('Please Input Target IP Address: ')
+            version_result = nmap.nmap_version_detection(ip_address)
+
     except:
         print('Error: Please try again')
 
@@ -25,7 +27,7 @@ def nmap_scan():
     jj = json.loads(json_formatted_str)
     formated = json.dumps(jj['192.168.184.129']['ports'],indent=4,sort_keys=True)
     data = jj['192.168.184.129']['ports']
-    with open(base.LOCAL_PATH+ ip_address + '_'+ str(date.date()) +'.txt', 'w') as f:
+    with open(base.NMAP_REPORT_PATH+ ip_address + '_'+ str(date.date()) +'.txt', 'w') as f:
         f.write("IP: %s\n" % ip_address)
         print("IP: %s" % ip_address)
         for port in data:
