@@ -13,6 +13,7 @@ import nmap_module
 import exploit_module
 import rc_module
 import base
+import validate
 
 excellentExplotis = []
 # excellentExplotis = ['unix/ftp/vsftpd_234_backdoor','windows/fileformat/activepdf_webgrabber', 'windows/fileformat/djvu_imageurl', 'windows/fileformat/mcafee_hercules_deletesnapshot', 'windows/fileformat/msworks_wkspictureinterface', 'windows/fileformat/sascam_get', 'windows/smb/ms04_007_killbill', 'windows/ftp/sami_ftpd_list']
@@ -39,7 +40,12 @@ def main():
     print(pyfiglet.figlet_format(augrs,font = "slant"))
     print('Starting Program...')
     print('Please Specify Initial Input')
-    base.settings['target_ip'] = input('Target Ip address: ')
+    ipaddr = input('Target Ip address: ')
+    while validate.validate_ip_address(ipaddr) == False:
+        print('Invalid Ip Address')
+        ipaddr = input('Please Input New Target Ip address: ')
+    base.settings['target_ip'] = ipaddr
+
     # settings['target_ip'] = input('Target Ip address: ')
     while True:
         print(banner)
