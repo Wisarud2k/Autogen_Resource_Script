@@ -44,6 +44,7 @@ def main():
     while validate.validate_ip_address(ipaddr) == False:
         print('Invalid Ip Address')
         ipaddr = input('Please Input New Target Ip address: ')
+    os.system('cls' if os.name == 'nt' else 'clear')
     base.settings['target_ip'] = ipaddr
 
     # settings['target_ip'] = input('Target Ip address: ')
@@ -128,23 +129,6 @@ def __edit_options():
 
 
 
-def exploit_list_extract(client,exploitlist):
-    for exploit in exploitlist:
-        rank = client.modules.use('exploit',exploit).rank
-        if(rank == 600): # Excellent modules
-            excellentExplotis.append(exploit)
-        elif(rank == 500): # great modules
-            greatExploits.append(exploit)
-        elif(rank == 400): # good modules
-            goodExploits.append(exploit)
-        elif(rank == 300): # normal modules
-            normalExploits.append(exploit)
-        elif(rank == 200): # average modules
-            averageExploits.append(exploit)
-        elif(rank == 100): # low modules
-            lowExploits.append(exploit)
-        else:
-            manualExplots.append(exploit)
 
 def wait_jobs():
     # for i in range(5):
