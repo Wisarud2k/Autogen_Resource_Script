@@ -72,6 +72,17 @@ def main():
         elif(command == '4'):
             os.system('cls' if os.name == 'nt' else 'clear')
             __options()
+        elif(command == '5'):
+            os.system('cls' if os.name == 'nt' else 'clear')
+            # Get a reference to the module manager
+            module_manager = client.modules
+
+            # Search for available modules containing the keyword "smb"
+            search_results = module_manager.search('test')
+
+            # Print the name and description of each matching module
+            for result in search_results:
+                print(f"{result['name']}: {result['description']}")
         elif(command == '0'):
             print('exiting ..')
             break
