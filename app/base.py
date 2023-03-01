@@ -5,3 +5,7 @@ REPORT_PATH = ''
 
 # setting dict for global setting
 settings = {'TTL':'30'}
+# open port for exploit searching 
+open_port = ['21','443']
+exploit_and_port = []
+exploit_list = []

@@ -4,6 +4,7 @@ import base
 import datetime
 import validate
 
+
 def nmap_scan():
     nmap = nmap3.Nmap()
     date = datetime.datetime.now()
@@ -13,7 +14,7 @@ def nmap_scan():
         try:
             if(validate.validate_ip_address(ip_address)): 
                 # ip_address = base.settings['target_ip']
-                print('ip ='+ip_address)
+                print('ip = '+ip_address)
                 version_result = nmap.nmap_version_detection(base.settings['target_ip']) 
                 json_formatted_str = json.dumps(version_result, indent=4,sort_keys=True)
                 jj = json.loads(json_formatted_str)
@@ -25,6 +26,7 @@ def nmap_scan():
                         # 4 case 
                         # have all information
                         # print(port)
+                        base.open_port.append(port['portid'])
                         if(port['state'] == 'open' and 'version' in port['service'].keys() and 'product' in port['service'].keys()):
                             print('PORT: ' +port['portid']+'/'+port['protocol'] +' SERVICE: '+port['service']['name'] + ' VERSION: ' + port['service']['product'] + ' ' + port['service']['version'])
                             f.write('PORT: ' +port['portid']+'/'+port['protocol'] +' SERVICE: '+port['service']['name'] + ' VERSION: ' + port['service']['product'] + ' ' + port['service']['version'])
@@ -44,7 +46,8 @@ def nmap_scan():
                             print('PORT: ' +port['portid']+'/'+port['protocol']+' SERVICE: '+port['service']['name'] + ' VERSION: ')
                             f.write('PORT: ' +port['portid']+'/'+port['protocol']+' SERVICE: '+port['service']['name'] + ' VERSION: ')
                             f.write('\n')
-                            break 
+                            
+                    break 
             else:
                 print('Error: Invalid Ip address')
                 break
