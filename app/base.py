@@ -4,7 +4,7 @@ NMAP_REPORT_PATH = 'C:/Users/wisarud/OneDrive/เดสก์ท็อป/Final_
 REPORT_PATH = ''
 
 # setting dict for global setting
-settings = {'TTL':'30'}
+settings = {'TTL':'30','LHOSTS':'172.17.0.2'}
 # open port for exploit searching 
 open_port = ['21']
 exploit_and_port = {}

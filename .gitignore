@@ -165,3 +165,4 @@ app/rc/resource_script.rc
 app/rc/
 app/scan_results.txt
 app/nmap_report/
+app/exploit_report/**
