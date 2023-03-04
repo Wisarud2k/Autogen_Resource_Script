@@ -1,7 +1,9 @@
-LOCAL_PATH = 'C:/Users/wisarud/OneDrive/เดสก์ท็อป/Final_Project/Autogen_Resource_Script/app/rc/'
+import os
+cwd = os.getcwd()
+LOCAL_PATH = cwd + '/rc/'
 RESOURCE_PATH = '/shared-vol/'
-NMAP_REPORT_PATH = 'C:/Users/wisarud/OneDrive/เดสก์ท็อป/Final_Project/Autogen_Resource_Script/app/nmap_report/'
-REPORT_PATH = ''
+NMAP_REPORT_PATH =  cwd + '/nmap_report/'
+REPORT_PATH = cwd + '/exploit_report'
 
 # setting dict for global setting
 settings = {'TTL':'30','LHOSTS':'172.17.0.2'}
