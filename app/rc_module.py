@@ -26,9 +26,9 @@ if __name__ == "__main__":
     main()
 
 def generate_resource_script(commands):
-  with open(base.LOCAL_PATH +'resource_script.rc', 'w') as f:
-    for command in commands:
-      f.write(command + '\n')
+    with open(base.LOCAL_PATH +'resource_script.rc', 'w') as f:
+        for command in commands:
+            f.write(command + '\n')
 
 def run_resource_script(msf_client):
     # result = msf_client.modules.execute('resource', constant.resouce_path)
