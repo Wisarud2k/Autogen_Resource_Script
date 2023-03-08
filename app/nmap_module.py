@@ -52,7 +52,9 @@ def nmap_scan():
                 print('Error: Invalid Ip address')
                 break
                 
-        except:
+        except KeyboardInterrupt:
+            break
+        except :
             print('Error: Please try again')
             break
 
