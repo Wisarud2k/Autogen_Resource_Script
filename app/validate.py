@@ -16,7 +16,7 @@ def setting_validate(fieldname,value):
     
 def is_valid_filename(filename):
     # Define a regular expression to match valid filenames
-    pattern = r"^[a-zA-Z0-9_-]+\.[a-zA-Z0-9]+$"
+    pattern = r"^[a-zA-Z0-9_-]+$"
     
     # Use the regular expression to check whether the filename matches the pattern
     match = re.match(pattern, filename)
