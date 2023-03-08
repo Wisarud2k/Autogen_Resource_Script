@@ -48,9 +48,10 @@ def main():
     base.settings['target_ip'] = ipaddr
 
     # settings['target_ip'] = input('Target Ip address: ')
+    print(banner)
     while True:
         try:
-            print(banner)
+            # print(banner)
             print('press [1] to go to Nmap module')
             print('press [2] to go to Exploit module')
             # print('press [3] to go to Resource Script module')
@@ -62,10 +63,12 @@ def main():
                 # print('go to Nmap')
                 os.system('cls' if os.name == 'nt' else 'clear')
                 nmap_module.nmap_scan()
+                print(banner)
             elif(command == '2'):
                 # print('go to Exploit')
                 os.system('cls' if os.name == 'nt' else 'clear')
                 exploit_module.exploit(client)
+                print(banner)
             # elif(command == '3'):
             #     # print('Resource ')
             #     os.system('cls' if os.name == 'nt' else 'clear')
@@ -73,10 +76,13 @@ def main():
             elif(command == '3'):
                 os.system('cls' if os.name == 'nt' else 'clear')
                 __options()
+                print(banner)
             elif(command == '0'):
                 print('exiting ..')
                 break
             else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(banner)
                 print('Error: Command Not Found')
         except KeyboardInterrupt:
             break
