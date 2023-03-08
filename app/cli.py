@@ -87,26 +87,54 @@ def __options():
     # text = "OPTIONS"
     print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
     while True:
-        for key in base.settings:
-            print(key + ": " + str(base.settings[key]))
-        print('')
-        print('press [1] to edit options')
-        print('press [0] to exit')
-        command = input('Input Command Here: ')
+        try:
+            for key in base.settings:
+                print(key + ": " + str(base.settings[key]))
+            print('')
+            print('press [1] to edit options')
+            print('press [0] to exit')
+            command = input('Input Command Here: ')
 
-        if(command == '1'):
-            os.system('cls' if os.name == 'nt' else 'clear')
-            __edit_options()
-            # print('current Ip address is '+settings['target_ip']) 
-        elif(command == '0'):
-            print('exiting ..')
+            if(command == '1'):
+                os.system('cls' if os.name == 'nt' else 'clear')
+                __edit_options()
+                print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
+                # print('current Ip address is '+settings['target_ip']) 
+            elif(command == '0'):
+                print('exiting ..')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                break
+            else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
+                print('Error: Command Not Found')
+        except KeyboardInterrupt:
             os.system('cls' if os.name == 'nt' else 'clear')
             break
-        else:
-            print('Error: Command Not Found')
+        # for key in base.settings:
+        #     print(key + ": " + str(base.settings[key]))
+        # print('')
+        # print('press [1] to edit options')
+        # print('press [0] to exit')
+        # command = input('Input Command Here: ')
+
+        # if(command == '1'):
+        #     os.system('cls' if os.name == 'nt' else 'clear')
+        #     __edit_options()
+        #     print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
+        #     # print('current Ip address is '+settings['target_ip']) 
+        # elif(command == '0'):
+        #     print('exiting ..')
+        #     os.system('cls' if os.name == 'nt' else 'clear')
+        #     break
+        # else:
+        #     os.system('cls' if os.name == 'nt' else 'clear')
+        #     print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
+        #     print('Error: Command Not Found')
+
 
 def __edit_options():
-    
+    print(pyfiglet.figlet_format(text = "EDIT OPTIONS",font = "slant"))
     while True:
         try:
             settings = base.settings
@@ -124,9 +152,16 @@ def __edit_options():
                 if(validate.setting_validate(numkey[command],newvalue)):
                     base.settings[numkey[command]] = newvalue
                 else:
-                    print('Invalid Input')
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    print(pyfiglet.figlet_format(text = "EDIT OPTIONS",font = "slant"))
+                    print('Error: Invalid Input')
             else:
-                print('Invalid Input')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(pyfiglet.figlet_format(text = "EDIT OPTIONS",font = "slant"))
+                print('Error: Invalid Input')
+        except KeyboardInterrupt:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
         except:
             os.system('cls' if os.name == 'nt' else 'clear')
             break
@@ -134,25 +169,6 @@ def __edit_options():
 
 
 
-def wait_jobs():
-    # for i in range(5):
-    #     print(".", end="", flush=True)
-    #     time.sleep(1)
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    for i in progressbar(range(15), "Running an Exploit: ", 40):
-        time.sleep(0.1)
-
-def progressbar(it, prefix="", size=60, out=sys.stdout): # Python3.3+
-    count = len(it)
-    def show(j):
-        x = int(size*j/count)
-        print("{}[{}{}] ".format(prefix, "#"*x, "."*(size-x)), 
-                end='\r', file=out, flush=True)
-    show(0)
-    for i, item in enumerate(it):
-        yield item
-        show(i+1)
-    # print("\n", flush=True, file=out)
 
 
 
