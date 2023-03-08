@@ -53,8 +53,8 @@ def main():
             print(banner)
             print('press [1] to go to Nmap module')
             print('press [2] to go to Exploit module')
-            print('press [3] to go to Resource Script module')
-            print('press [4] to go to Options')
+            # print('press [3] to go to Resource Script module')
+            print('press [3] to go to Options')
             print('press [0] to exit')
             command = input('Input Command Here: ')
 
@@ -66,24 +66,13 @@ def main():
                 # print('go to Exploit')
                 os.system('cls' if os.name == 'nt' else 'clear')
                 exploit_module.exploit(client)
+            # elif(command == '3'):
+            #     # print('Resource ')
+            #     os.system('cls' if os.name == 'nt' else 'clear')
+            #     rc_module.main(client)
             elif(command == '3'):
-                # print('Resource ')
-                os.system('cls' if os.name == 'nt' else 'clear')
-                rc_module.main(client)
-            elif(command == '4'):
                 os.system('cls' if os.name == 'nt' else 'clear')
                 __options()
-            elif(command == '5'):
-                os.system('cls' if os.name == 'nt' else 'clear')
-                # Get a reference to the module manager
-                module_manager = client.modules
-
-                # Search for available modules containing the keyword "smb"
-                search_results = module_manager.search('test')
-
-                # Print the name and description of each matching module
-                for result in search_results:
-                    print(f"{result['name']}: {result['description']}")
             elif(command == '0'):
                 print('exiting ..')
                 break
