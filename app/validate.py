@@ -11,7 +11,7 @@ def validate_ip_address(ip_string):
 def setting_validate(fieldname,value):
     if(fieldname == 'target_ip'):
         return validate_ip_address(value)
-    elif(fieldname == 'TTL'):
+    elif(fieldname == 'TTL(s)'):
         return value.isdigit()
     
 def is_valid_filename(filename):
