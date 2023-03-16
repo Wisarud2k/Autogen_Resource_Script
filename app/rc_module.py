@@ -26,7 +26,7 @@ if __name__ == "__main__":
     main()
 
 def generate_resource_script(commands,filename,targetos):
-    ttl = base.settings['TTL']
+    ttl = base.settings['TTL(s)']
     ip_address = base.settings['target_ip']
     if(targetos == 'linux'):
         with open(base.LOCAL_PATH + filename +'.sh', 'w', newline='\n') as f:

@@ -25,7 +25,7 @@ lowExploits = []
 manualExplots = []
 
 # setting dict for global setting
-settings = {'TTL':30}
+settings = {'TTL(s)':30}
 
 def main():
     client = MsfRpcClient('test',port=55553)
@@ -56,6 +56,7 @@ def main():
             print('press [2] to go to Exploit module')
             # print('press [3] to go to Resource Script module')
             print('press [3] to go to Options')
+            print('press [99] see help options')
             print('press [0] to exit')
             command = input('Input Command Here: ')
 

@@ -14,7 +14,7 @@ def nmap_scan():
         try:
             if(validate.validate_ip_address(ip_address)): 
                 # ip_address = base.settings['target_ip']
-                print('ip = '+ip_address)
+                print('Scanning for ip = '+ip_address)
                 version_result = nmap.nmap_version_detection(base.settings['target_ip']) 
                 json_formatted_str = json.dumps(version_result, indent=4,sort_keys=True)
                 jj = json.loads(json_formatted_str)
