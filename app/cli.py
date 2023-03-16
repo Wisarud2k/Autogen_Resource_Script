@@ -56,7 +56,7 @@ def main():
             print('press [2] to go to Exploit module')
             # print('press [3] to go to Resource Script module')
             print('press [3] to go to Options')
-            print('press [99] see help options')
+            print('press [99] for help')
             print('press [0] to exit')
             command = input('Input Command Here: ')
 
@@ -78,6 +78,13 @@ def main():
                 os.system('cls' if os.name == 'nt' else 'clear')
                 __options()
                 print(banner)
+            elif(command == '99'):
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(banner)
+                print("Basic Flow 1\t\tNmap Module --> Exploit Module --> search exploit --> run exploit")
+                print("Basic Flow 2\t\tNmap Module --> Exploit Module --> generate resource script ")
+                print("Nmap Module\t\tRun Nmap on your local to scan for an open port and generate a report after successfully run (Report will generate in Folder nmap_report)")
+                print()
             elif(command == '0'):
                 print('exiting ..')
                 break
@@ -99,6 +106,7 @@ def __options():
                 print(key + ": " + str(base.settings[key]))
             print('')
             print('press [1] to edit options')
+            print('press [99] for helps')
             print('press [0] to exit')
             command = input('Input Command Here: ')
 
@@ -107,6 +115,11 @@ def __options():
                 __edit_options()
                 print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
                 # print('current Ip address is '+settings['target_ip']) 
+            elif(command == '99'):
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(pyfiglet.figlet_format(text = "OPTIONS",font = "slant"))
+                print('select number in front of an options to edit')
+                print()
             elif(command == '0'):
                 print('exiting ..')
                 os.system('cls' if os.name == 'nt' else 'clear')
