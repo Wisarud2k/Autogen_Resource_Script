@@ -38,8 +38,8 @@ def main():
     # initialize require options
     print(pyfiglet.figlet_format(augrs,font = "slant"))
     print('Starting Program...')
-    print('Please Input MSFRPC Password')
-    client = MsfRpcClient('test',port=55553)
+    password = input('Please Input MSFRPC Password\n')
+    client = MsfRpcClient(password,port=55553)
     print('Please Specify Initial Input')
     ipaddr = input('Target Ip address: ')
     while validate.validate_ip_address(ipaddr) == False:
