@@ -28,8 +28,7 @@ manualExplots = []
 settings = {'TTL(s)':30}
 
 def main():
-    client = MsfRpcClient('test',port=55553)
-
+    
     text = "HOME"
     augrs = "AugRS"
     # Use the `figlet_format` function to generate the banner
@@ -39,6 +38,8 @@ def main():
     # initialize require options
     print(pyfiglet.figlet_format(augrs,font = "slant"))
     print('Starting Program...')
+    print('Please Input MSFRPC Password')
+    client = MsfRpcClient('test',port=55553)
     print('Please Specify Initial Input')
     ipaddr = input('Target Ip address: ')
     while validate.validate_ip_address(ipaddr) == False:
