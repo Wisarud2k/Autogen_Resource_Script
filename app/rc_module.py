@@ -1,5 +1,5 @@
 from pymetasploit3.msfrpc import AuthManager
-import base
+import app.base as base
 import os
 
 def main(client):
