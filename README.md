@@ -1,34 +1,47 @@
-# python-cli-template
+# Auto Generate Metasploit Resouce Script
 
-A starting point for building Python Command Line Applications.
+This Program can run an exploit with automate search for open port with excellent rank in Metasploit Module.
+Generate shell / bash scripts to use in security automate test  
 
-## About 
+## Getting Started
+### Prerequisites
+~~~
+- Python >= 3.10
+- python3-nmap
+- pymetasploit3
+- etc..
+~~~
 
-This project serves as a starting point to developing command line modules with Python. It is structured in such a way that 
-when we call the module it executes the main method in `app/cli.py`. This is typically where you would want to add 
-your own logic.
+### Installing
 
-The setup.py file includes some advanced patterns and best 
-practices for setup.py, as well as some commented–out nice–to–haves. For example, it provides a `python 
-setup.py upload` command, which creates a universal wheel (and sdist) and uploads your package to PyPi using Twine. 
-It also creates/uploads a new git tag, automatically.
+~~~
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run 'pip install -r requirements.txt' to install dependencies.
+4. Start program wiht python3 autogen.py
+~~~
 
-## Setup
+MSFRPC Installing
 
-```
-virtualenv env
-source env/bin/activate
-pip install -r requirements.txt
-python -m app --help
-```
+~~~
+This project use msfrpc api and msfconsole you may need to install and start rpc server or in case of you don't have msfrpc instance
+1.install docker desktop or cli (both can use)
+2.use docker pull on my ubuntu-metasploit image at url:.....
+	with command docker pull ....
+3. start docker with command .....
+	which will create a docker container that use port 55553 and 443
+run autogen.py wiht msfrpc password "test"
 
-## Packaging 
+~~~
+## Usage
 
-Update `setup.py` with your details and then run `python setup.py upload` to package for distribution on PyPi.
+~~~
+run exploit in program:
+xxx
 
-## Contributing
+create shell or bash script for running exploit
+~~~
 
-- Fork the project and clone locally.
-- Create a new branch for what you're going to work on.
-- Push to your origin repository.
-- Create a new pull request in GitHub.
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
