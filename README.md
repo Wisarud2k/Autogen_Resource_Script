@@ -42,7 +42,7 @@ python3 autogen.py
 ~~~
 After first docker run you can start your own docker container with
 ~~~
-dokcer start -i {your own container name}
+docker start -i {your own container name}
 ~~~
 ## Usage
 
