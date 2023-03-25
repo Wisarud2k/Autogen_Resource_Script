@@ -15,10 +15,10 @@ def nmap_scan():
             if(validate.validate_ip_address(ip_address)): 
                 # ip_address = base.settings['target_ip']
                 print('Scanning for ip = '+ip_address)
-                version_result = nmap.nmap_version_detection(base.settings['target_ip']) 
+                version_result = nmap.nmap_version_detection(base.settings['target_ip'],args ="-Pn") 
                 json_formatted_str = json.dumps(version_result, indent=4,sort_keys=True)
                 jj = json.loads(json_formatted_str)
-                data = jj['192.168.184.129']['ports']
+                data = jj[ip_address]['ports']
                 with open(base.NMAP_REPORT_PATH+ ip_address + '_'+ str(date.date()) +'.txt', 'w') as f:
                     f.write("IP: %s\n" % ip_address)
                     print("IP: %s" % ip_address)
@@ -54,7 +54,8 @@ def nmap_scan():
                 
         except KeyboardInterrupt:
             break
-        except :
+        except Exception as e:
+            print(e)
             print('Error: Please try again')
             break
 
