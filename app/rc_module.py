@@ -25,11 +25,11 @@ def main(client):
 if __name__ == "__main__":
     main()
 
-def generate_resource_script(commands,filename,targetos):
+def generate_resource_script(commands,filename,targetos,folder_path):
     ttl = base.settings['TTL(s)']
     ip_address = base.settings['target_ip']
     if(targetos == 'linux'):
-        with open(base.LOCAL_PATH + filename +'.sh', 'w', newline='\n') as f:
+        with open(folder_path + '/' + filename +'.sh', 'w', newline='\n') as f:
             f.write(f"#!/bin/bash\n")
             f.write(f"which msfconsole > /dev/null 2>&1\n")
             f.write(f"if [ $? -ne 0 ]; then\n")
@@ -58,13 +58,14 @@ def generate_resource_script(commands,filename,targetos):
             f.write(f'"\n')
             f.write(f'echo "$resource_file" | msfconsole -q -r /dev/stdin')
 
-        os.chmod(base.LOCAL_PATH + filename +'.sh', 0o755)
-        with open(base.LOCAL_PATH + filename +'.sh', 'rb') as f:
+        os.chmod(folder_path + '/' + filename +'.sh', 0o755)
+        with open(folder_path + '/' + filename +'.sh', 'rb') as f:
             content = f.read()
-        with open(base.LOCAL_PATH + filename +'.sh', 'wb') as f:
+        with open(folder_path + '/' + filename +'.sh', 'wb') as f:
             f.write(content.replace(b'\r\n', b'\n'))
+        print('Script Create in ' + folder_path)
     elif(targetos == 'window'):
-        with open(base.LOCAL_PATH + filename +'.bat', 'w', newline='\n') as f:
+        with open(folder_path + '/' + filename +'.bat', 'w', newline='\n') as f:
             f.write(f"@echo off\n")
             f.write(f"where msfconsole >nul 2>&1\n")
             f.write(f" %errorlevel% neq 0 (\n")
@@ -90,7 +91,7 @@ def generate_resource_script(commands,filename,targetos):
             # f.write(f"echo \"set RHOSTS {lhost}\" >> /tmp/resource.rc\n")
             f.write(f'^\n')
             f.write(f'echo %resource_file% | msfconsole -q -r -')
-    
+            print('Script Create in ' + folder_path)
         
 def run_resource_script(msf_client):
     # result = msf_client.modules.execute('resource', constant.resouce_path)
