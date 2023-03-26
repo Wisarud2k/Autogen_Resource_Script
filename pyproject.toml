@@ -8,7 +8,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 [project]
 name = "augrs"
-version = "0.0.4"
+version = "1.0.0"
 authors = [
   { name="Wisarud Wongta", email="wisarud2k@gmail.com" },
 ]
