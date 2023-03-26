@@ -1,8 +1,8 @@
 import nmap3
 import json
-import base
+import augrs.base as base
 import datetime
-import validate
+import augrs.validate as validate
 import os
 import platform
 

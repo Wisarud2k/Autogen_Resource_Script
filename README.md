@@ -1,34 +1,75 @@
-# python-cli-template
+# Auto Generate Metasploit Resouce Script
 
-A starting point for building Python Command Line Applications.
+This Program run an exploit with automate search for open port using only excellent rank in Metasploit Module.
+Generate shell / bash scripts to use in security automate test
 
-## About 
+## Getting Started
+### Prerequisites
+~~~
+- Python >= 3.10
+- python3-nmap
+- pymetasploit3
+- pyfiglet
+~~~
 
-This project serves as a starting point to developing command line modules with Python. It is structured in such a way that 
-when we call the module it executes the main method in `app/cli.py`. This is typically where you would want to add 
-your own logic.
+### Installing
 
-The setup.py file includes some advanced patterns and best 
-practices for setup.py, as well as some commented–out nice–to–haves. For example, it provides a `python 
-setup.py upload` command, which creates a universal wheel (and sdist) and uploads your package to PyPi using Twine. 
-It also creates/uploads a new git tag, automatically.
+~~~
+pip install augrs 
+~~~
 
-## Setup
+ #### Nmap Installing
+ 
+ This project use Nmap to search for an open port you must install Nmap in your local to use this function
+ [Download the Free Nmap Security Scanner for Linux/Mac/Windows](https://nmap.org/download.html)
 
-```
-virtualenv env
-source env/bin/activate
-pip install -r requirements.txt
-python -m app --help
-```
+#### MSFRPC Installing
 
-## Packaging 
+This project use MSFRPC API and msfconsole you must install and start RPC server before running the program
+In case of you don't have MSFRPC or msfconsole instance
+We provide the docker image that contain both you may follow the step below
+1. Install docker desktop  [Get Docker](https://docs.docker.com/get-docker/)
+2. Pull docker image for running MSFRPC and msfconsole
+~~~
+docker pull wisarud2k/ubuntu-metasploit
+~~~
+3. Start docker image and mapping port using port 55553 and 443
+~~~
+docker run -it -p 55553:55553 -p 443:443 --name={your own container name} wisarud2k/ubuntu-metasploit:latest
+~~~
+4. Run program with MSFRPC password "test"
+~~~
+augrs
+~~~
+After first docker run you can start your own docker container with
+~~~
+docker start -i {your own container name}
+~~~
+## Usage
+Start the program in console with command
+~~~
+augrs
+~~~
+### Run exploit in program:
+1. Use Nmap module
+2. Go to Exploit module
+3. Use Search for exploit
+4. Run all exploit and wait for report
+5. The report will create in exploit_report folder
 
-Update `setup.py` with your details and then run `python setup.py upload` to package for distribution on PyPi.
+### create shell or bash script for running exploit
+1. Use Nmap module
+2. Go to Exploit module
+3. Use Generate resource script
+4. select the environment to create script (linux or window)
+5. name the script and enter 
+6. The script will create in rc folder
 
-## Contributing
+### Options manage
+1. Use Options module
+2. select options that want to edit
+3. edit you options
 
-- Fork the project and clone locally.
-- Create a new branch for what you're going to work on.
-- Push to your origin repository.
-- Create a new pull request in GitHub.
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.

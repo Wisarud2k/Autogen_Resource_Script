@@ -9,11 +9,11 @@ import sys
 
 import pyfiglet
 
-import nmap_module
-import exploit_module
-import rc_module
-import base
-import validate
+import augrs.nmap_module as nmap_module
+import augrs.exploit_module as exploit_module
+import augrs.rc_module as rc_module
+import augrs.base as base
+import augrs.validate as validate
 
 excellentExplotis = []
 # excellentExplotis = ['unix/ftp/vsftpd_234_backdoor','windows/fileformat/activepdf_webgrabber', 'windows/fileformat/djvu_imageurl', 'windows/fileformat/mcafee_hercules_deletesnapshot', 'windows/fileformat/msworks_wkspictureinterface', 'windows/fileformat/sascam_get', 'windows/smb/ms04_007_killbill', 'windows/ftp/sami_ftpd_list']
